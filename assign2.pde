@@ -64,16 +64,6 @@ void draw()
   
 else
 {
-//isPlaying=false
-//GAME START IMG
-//begin SITUATION
-
-//for some reason HERE IS NOT WORKING WELL
-
-
-//   image(start1Img,-10000,0);
-//   image(start2Img,-10000,0);
-
 
 //bg1 position
   image(bg1Img,a,0);
@@ -113,7 +103,7 @@ else
 
 //enemy's position's variable
   enemyX+=2 ;
-  enemyX%=480; 
+  enemyX%=640; 
  
  enemyY=80;
  
@@ -125,7 +115,8 @@ else
 //  image(fighterImg,fighterX,mouseY);
   
 //fighter touches the enemy and causes GAME OVER
-if (enemyX==fighterX-2||enemyY==fighterY){
+if (enemyX==fighterX-2||enemyY==fighterY)
+{
 //isPlaying=false;
   image(end1Img,0,0);
   if(320<= mouseX&&mouseX <=420 || 350<=mouseY&&mouseY<=360)
@@ -146,19 +137,20 @@ void mousePressed(){
 
 void keyPressed(){
 if (key==CODED)
-{
-if(keyCode==UP)
-{
-  fighterY-=5;
+{if(keyCode==UP){
+  fighterY-=5;}
+if(key==CODED){
+if(keyCode==DOWN){
+  fighterY+=5;}
+}
 }
 if(key==CODED)
-{
-if(keyCode==DOWN)
-{
-  fighterY+=5;
+{if(keyCode==LEFT)
+{fighterX-=5;}}
+if(key==CODED)
+{if(keyCode==RIGHT)
+{fighterX+=5;}
 }
-}
-}  
 }
 
 //void keyReleased(){
