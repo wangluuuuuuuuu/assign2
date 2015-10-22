@@ -56,8 +56,9 @@ void draw()
   image(start1Img,0,0);
   image(start2Img,-1000,0);
   }
-  
-}
+
+
+  } 
 
 
   
@@ -70,6 +71,7 @@ else
 //bg2 position
   image(bg2Img,b,0);
   
+
   
 //blood bar
   rectMode(CORNERS);
@@ -79,8 +81,18 @@ else
   fill(255,0,0,190);
   
   image(HPImg,0,0);   
-  
-  
+  //position of img    
+  image(enemyImg,enemyX,enemyY);
+  image(treasureImg,treasurex,treasurey);
+  image(fighterImg,fighterX,fighterY);
+  image(end1Img,-640,0);
+  image(end2Img,-640,0);
+//enemy's position's variable
+enemyX+=2 ;
+enemyX%=640; 
+enemyY=80;
+ 
+ 
 
 //background img bg1 positon variable
 if (a<638){
@@ -100,33 +112,24 @@ else
 {
   b=-640;
 }
-
-//enemy's position's variable
-  enemyX+=2 ;
-  enemyX%=640; 
  
- enemyY=80;
- 
-//position of img    
-  image(enemyImg,enemyX,enemyY);
-  image(treasureImg,treasurex,treasurey);
-  image(fighterImg,fighterX,fighterY);
-
-//  image(fighterImg,fighterX,mouseY);
-  
 //fighter touches the enemy and causes GAME OVER
-if (enemyX==fighterX-2||enemyY==fighterY)
+if (enemyX>=fighterX-5 && enemyY<=fighterY+6||enemyY>=fighterY-6)
 {
-//isPlaying=false;
   image(end1Img,0,0);
-  if(320<= mouseX&&mouseX <=420 || 350<=mouseY&&mouseY<=360)
+  if(320<= mouseX||mouseX <=420 && 350<=mouseY||mouseY<=360)
   {
     image(end2Img,0,0);
     image(end1Img,-640,0);
   }
 
-  }
+
+
+//  image(fighterImg,fighterX,mouseY);
+  
+
  }
+}
 }
 
 void mousePressed(){
