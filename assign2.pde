@@ -1,5 +1,6 @@
 
 //declare variables
+
 PImage HPImg;
 PImage enemyImg;
 PImage fighterImg;
@@ -8,6 +9,17 @@ PImage bg1Img,bg2Img;
 PImage start1Img,start2Img;
 PImage end1Img,end2Img;
 
+boolean upPressed=false;
+boolean downPressed=false;
+boolean leftPressed=false;
+boolean rightPressed=false;
+
+final int START_PAGE=0;
+final int GAME_BEGIN=2;
+final int GAME_OVER=3;
+
+final int GAME_INITIALIZATION=1;//to reinvent new position of bloodbar and fighter
+int game;
 int x=floor(random(150)) ;
 int treasurex=floor(random(610));
 int treasurey=floor(random(450));
@@ -16,6 +28,8 @@ int a=4;
 int b=-640;
 
 boolean isPlaying=false;
+boolean startImgDark=true;
+boolean startImgShine=false;
 
 int fighterX=600;
 int fighterY=320;
@@ -23,7 +37,8 @@ int fighterY=320;
 int enemyX=1;
 int enemyY=floor(random(480));
 
-
+boolean endPicDark=true;
+boolean endPicShine=false;
 void setup()
 {
   
@@ -46,7 +61,7 @@ void setup()
 void draw()
 
 {
-//GAME SITUATION  
+/*  //GAME SITUATION  
  if (isPlaying==false)
  {
    
@@ -59,20 +74,54 @@ void draw()
 
 
   } 
+*/
 
 
-  
-  
-else
-{
-
-//bg1 position
-  image(bg1Img,a,0);
-//bg2 position
-  image(bg2Img,b,0);
+switch(game){
   
 
+
+
+case START_PAGE://0
+
+  if(startImgDark){
+  image(start2Img,0,0);}
+   if(mouseX<=500 && mouseX>=200 && mouseY>=380 && mouseY<=400){
+     startImgDark=false;
+     startImgShine=true;
+     if (startImgShine){
+     image(start1Img,0,0);
+     image(start2Img,-1000,0);}
+    if(mousePressed){
+    game=1;
+   }
+   }
   
+  
+
+      
+  
+ /* image(start2Img,0,0);
+  if(mouseX<=500 && mouseX>=200 && mouseY<=380 && mouseY>=400)
+  {
+    image(start1Img,0,0);
+    image(start2Img,-640,0);
+    if(mousePressed){
+    game=GAME_START;
+  }*/
+  
+  
+
+break  ;
+
+
+
+case GAME_INITIALIZATION://1
+image(bg1Img,0,0);
+fighterX=600;
+fighterY=320;
+
+enemyX=1;
 //blood bar
   rectMode(CORNERS);
   rect(15,13,15+x,20);
@@ -80,7 +129,40 @@ else
   colorMode(RGB);
   fill(255,0,0,190);
   
-  image(HPImg,0,0);   
+  image(HPImg,0,0); 
+  game=2;
+  
+
+break;
+
+case GAME_BEGIN://2
+//mouse moves the fighter
+
+if(upPressed){fighterY-=2;}
+if(downPressed){fighterY+=2;}
+if(fighterY>height-50){fighterY=height-50;}
+if (leftPressed){fighterX-=2;}
+if(rightPressed){fighterX+=2;}
+if(fighterX>width-50){fighterX=width-50;}
+if(fighterX<0){fighterX=0;}
+if(fighterY<0){fighterY=0;}
+
+
+
+//bg1 position
+  image(bg1Img,a,0);
+//bg2 position
+  image(bg2Img,b,0);
+  
+  rectMode(CORNERS);
+  rect(15,13,15+x,20);
+  noStroke();
+  colorMode(RGB);
+  fill(255,0,0,190);
+  
+  image(HPImg,0,0); 
+  
+  
   //position of img    
   image(enemyImg,enemyX,enemyY);
   image(treasureImg,treasurex,treasurey);
@@ -112,25 +194,47 @@ else
 {
   b=-640;
 }
- 
+
 //fighter touches the enemy and causes GAME OVER
-if (enemyX>=fighterX-5 && enemyY<=fighterY+6||enemyY>=fighterY-6)
+// || enemyY<=fighterY+10 && enemyY>=fighterY-10
+if ( enemyX+10>=fighterX)
 {
+  if( enemyY<=fighterY+20 || enemyY>=fighterY-20)
+{game=3;}
+else{game=2;}
+}
+break;
+
+
+
+
+
+case GAME_OVER://3
+if(endPicDark){
+image(end2Img,0,0);
+}
+if(mouseX<=500 && mouseX>=200 && mouseY>=320 && mouseY<=340)
+{ 
+endPicDark=false;
+endPicShine=true;
+if(endPicShine){
   image(end1Img,0,0);
-  if(320<= mouseX||mouseX <=420 && 350<=mouseY||mouseY<=360)
-  {
-    image(end2Img,0,0);
-    image(end1Img,-640,0);
-  }
-
-
-
-//  image(fighterImg,fighterX,mouseY);
-  
-
+    if(mousePressed)
+    {
+      game=1;
+    }
+else
+{endPicDark=true;}
  }
 }
+break;
+ 
+
+
 }
+}
+
+//  image(fighterImg,fighterX,mouseY);
 
 void mousePressed(){
   //GAME START
@@ -139,21 +243,88 @@ void mousePressed(){
 
 
 void keyPressed(){
+if(key==CODED){
+switch(keyCode){
+  case UP :
+  upPressed=true;
+  break;
+
+case DOWN:
+downPressed=true;
+break;
+
+case LEFT:
+leftPressed=true;
+break;
+
+case RIGHT:
+rightPressed=true;
+break;
+
+}
+}
+  
+}
+
+/*  if(fighterY>=480)
+{
+  fighterY=480;
+}
+if(fighterY<=0)
+{
+  fighterY=0;
+}
+if(fighterX<=0)
+{
+fighterX=0;
+}
+
+if(fighterX>=640)
+{
+fighterX=640;
+}
 if (key==CODED)
 {if(keyCode==UP){
-  fighterY-=5;}
+  fighterY-=5;
+}
+}
 if(key==CODED){
 if(keyCode==DOWN){
-  fighterY+=5;}
-}
-}
-if(key==CODED)
-{if(keyCode==LEFT)
-{fighterX-=5;}}
-if(key==CODED)
-{if(keyCode==RIGHT)
-{fighterX+=5;}
+  fighterY+=5;
+
 }
 }
 
-//void keyReleased(){
+if(key==CODED)
+{if(keyCode==LEFT)
+{fighterX-=5;
+}
+if(key==CODED)
+{if(keyCode==RIGHT)
+{fighterX+=5;
+}
+}
+}
+*/
+void keyReleased(){
+if(key==CODED){
+switch(keyCode){
+  case UP :
+  upPressed=false;
+  break;
+
+case DOWN:
+downPressed=false;
+break;
+
+case LEFT:
+leftPressed=false;
+break;
+
+case RIGHT:
+rightPressed=false;
+break;
+
+}
+}
+}
