@@ -86,7 +86,7 @@ case START_PAGE://0
 
   if(startImgDark){
   image(start2Img,0,0);}
-   if(mouseX<=500 && mouseX>=200 && mouseY>=380 && mouseY<=400){
+   if(mouseX<=490 && mouseX>=200 && mouseY>=380 && mouseY<=420){
      startImgDark=false;
      startImgShine=true;
      if (startImgShine){
