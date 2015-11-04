@@ -80,7 +80,7 @@ void draw()
 switch(game){
   
 
-
+//mouseX<=490 && mouseX>=200 && mouseY>=380 && mouseY<=420)
 
 case START_PAGE://0
 
