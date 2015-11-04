@@ -95,6 +95,7 @@ case START_PAGE://0
     if(mousePressed){
     game=1;
    }
+   else{startImgDark=true;}
    }
   
   
