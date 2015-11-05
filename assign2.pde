@@ -1,4 +1,3 @@
-
 //declare variables
 
 PImage HPImg;
@@ -71,8 +70,6 @@ void draw()
   image(start1Img,0,0);
   image(start2Img,-1000,0);
   }
-
-
   } 
 */
 
@@ -198,11 +195,11 @@ else
 
 //fighter touches the enemy and causes GAME OVER
 // || enemyY<=fighterY+10 && enemyY>=fighterY-10
-if ( enemyX+10>=fighterX)
-{
-  if( enemyY<=fighterY+20 || enemyY>=fighterY-20)
+if (enemyY<=fighterY+20 && enemyY>=fighterY-20 )
+{if(enemyX+10>=fighterX )
 {game=3;}
-else{game=2;}
+else
+{game=2;}
 }
 break;
 
@@ -279,7 +276,6 @@ if(fighterX<=0)
 {
 fighterX=0;
 }
-
 if(fighterX>=640)
 {
 fighterX=640;
@@ -292,10 +288,8 @@ if (key==CODED)
 if(key==CODED){
 if(keyCode==DOWN){
   fighterY+=5;
-
 }
 }
-
 if(key==CODED)
 {if(keyCode==LEFT)
 {fighterX-=5;
