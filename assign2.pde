@@ -195,7 +195,7 @@ else
 
 //fighter touches the enemy and causes GAME OVER
 // || enemyY<=fighterY+10 && enemyY>=fighterY-10
-if (enemyY<=fighterY+30 && enemyY+40>=fighterY )
+if (enemyY<=fighterY+50 && enemyY+50>=fighterY )
 {if(enemyX+20>=fighterX )
 {game=3;}
 else
